@@ -25,7 +25,7 @@ export default function Home(){
       }, []);
 
     return(
-        <div id="main" style={{ backgroundImage: `url(${imageUrls[imageNumber]})` }}>
+        <div id="main-home" style={{ backgroundImage: `url(${imageUrls[imageNumber]})` }}>
             <Navbar></Navbar>
             <div id = "content">
                 <p className="text-light" id = "top-text">{topText}</p>

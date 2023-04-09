@@ -13,9 +13,17 @@ export default function Navbar(){
     const moviesDisabled = location.pathname === "/movies";
     const moviesColor = location.pathname === "/movies" ? "text-info" : "text-light";
 
+    const navbarStyle = location.pathname === "/" ?{
+        opacity: 0.8,
+      }
+      :
+      {
+        opacity: 1,
+      }
+
 
     return(
-        <Nav className="bg-dark">
+        <Nav className="bg-dark" style={navbarStyle} id="top">
             <div className="d-flex justify-content-between">
                 <Link to="/">
                     <Button className={homeColor} variant="dark" disabled={homeDisabled}><h4 className="nav-button">Home</h4></Button>

@@ -1,17 +1,17 @@
 import { Nav } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useLocation, Link } from "react-router-dom";
-import "../CSS/Navbar.css"
+import NavbarCss from "../CSS/Navbar.module.css"
 
 export default function Navbar(){
 
     const location = useLocation();
 
     const homeDisabled = location.pathname === "/";
-    const homeColor = location.pathname === "/" ? "text-info" : "text-light";
-
-    const moviesDisabled = location.pathname === "/movies";
-    const moviesColor = location.pathname === "/movies" ? "text-info" : "text-light";
+    const homeColor = homeDisabled ? "text-info" : "text-light";
+    
+    const moviesDisabled = location.pathname.includes("/movies");
+    const moviesColor = moviesDisabled ? "text-info" : "text-light";
 
     const navbarStyle = location.pathname === "/" ?{
         opacity: 0.8,
@@ -23,7 +23,7 @@ export default function Navbar(){
 
 
     return(
-        <Nav className="bg-dark" style={navbarStyle} id="top">
+        <Nav className="bg-dark" style={navbarStyle} id={NavbarCss.top}>
             <div className="d-flex justify-content-between">
                 <Link to="/">
                     <Button className={homeColor} variant="dark" disabled={homeDisabled}><h4 className="nav-button">Home</h4></Button>

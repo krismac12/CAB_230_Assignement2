@@ -1,23 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Home from './Pages/Home';
-import Movies from './Pages/Movies';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Store from './redux/Store';
+import { Provider } from 'react-redux';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-    <Routes>
-      <Route path='/' exact Component={Home}></Route>
-      <Route path='/movies' exact Component={Movies}></Route>
-    </Routes>
-    </BrowserRouter>
+    <Provider store={Store}>
+      <App/>
+    </Provider>
   </React.StrictMode>
 );
 

@@ -16,7 +16,6 @@ root.render(
     <Routes>
       <Route path='/' exact Component={Home}></Route>
       <Route path='/movies' exact Component={Movies}></Route>
-      <Route path='/movies/search' exact Component={Movies}></Route>
     </Routes>
     </BrowserRouter>
   </React.StrictMode>

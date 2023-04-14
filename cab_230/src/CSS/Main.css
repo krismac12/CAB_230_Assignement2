@@ -60,3 +60,12 @@ html.popup-visible::after {
     white-space: pre-wrap;
     word-wrap: break-word;
 }
+
+#successful-alert{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    text-align: center;
+}

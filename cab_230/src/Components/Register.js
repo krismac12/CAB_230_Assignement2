@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import { registerUser } from '../API-Calls/UserCalls';
 import { Alert, } from 'react-bootstrap';
 import { disableRegister } from '../redux/NavbarReducer';
+import { display } from '../redux/AlertsReducer';
 
 /*
 Component for rendering the register popup
@@ -35,7 +36,6 @@ function Register() {
       ...prevState,
       [name]: value,
     }))
-    console.log(formData)
   }
 
   // validates password fits constraints
@@ -62,7 +62,7 @@ function Register() {
       console.log("Not Valid")
       event.stopPropagation();
     } else {
-      console.log("Submitting form...");
+
     }
     // sets validated as true
     setValidated(true);
@@ -76,9 +76,11 @@ function Register() {
         setError(true)
         setMessage(res.message)
       }
-      // Disable register component
       else{
+        // Disable register component
         dispatch(disableRegister())
+        // Display alert showing user was created
+        dispatch(display({ message: "User created" }))
       }
     })
   };

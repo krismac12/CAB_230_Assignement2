@@ -5,6 +5,8 @@ import Popup from "../Components/Popup";
 import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import { Alert } from "react-bootstrap";
+
 /*
 Component for rendering the movies search page
 */
@@ -17,8 +19,10 @@ export default function Movies(){
 
     // Changes HTML class name when popup is visible
     const htmlClassName = disabled ? "popup-visible" : "";
-
     
+    // Defines wether to display alert and what message to display
+    const{display,message} = useSelector(state => state.Alerts)
+
     return(
         <div id="page">
             <div className="main">
@@ -30,6 +34,10 @@ export default function Movies(){
                     </Link>
                 </div> 
             </div>
+            {/* Renders Alert message */}
+            <Alert show={display} variant="success" id="successful-alert">
+                {message}
+            </Alert>
             {/* renders the register popup */}
             <Popup trigger = {registerPopup}>
                 <Register></Register>

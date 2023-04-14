@@ -48,7 +48,8 @@ export default function Home(){
         return () => clearTimeout(interval);
       }, []);
 
-    
+    // Defines wether to display alert and what message to display
+    const{display,message} = useSelector(state => state.Alerts)
 
     // Render Home Component
     return(
@@ -56,13 +57,14 @@ export default function Home(){
             <div id={Homecss.main} style={{ backgroundImage: `url(${imageUrls[imageNumber]})` }} className="main-darken">
                 <Navbar></Navbar>
                 <div className = "content">
-                    <Alert show={false} variant="success" className="successful-alert">
-                        user created
-                    </Alert>
                     <p className="text-light" id = {Homecss.top_text}>{topText}</p>
                 </div>
                 <p className="fixed-bottom text-light" id = {Homecss.bot_text}>{botText}</p>
             </div>
+            {/* Renders Alert message */}
+            <Alert show={display} variant="success" id="successful-alert">
+                        {message}
+            </Alert>
             {/* renders the register popup */}
             <Popup trigger = {registerPopup}>
                 <Register></Register>

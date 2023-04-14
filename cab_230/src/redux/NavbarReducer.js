@@ -1,8 +1,13 @@
+// Imports
 import { createSlice } from "@reduxjs/toolkit";
 
-
+/*
+Responsible for managing the different Navbar states such as disabled buttons, 
+popups and Navbar button colours
+*/
 export const NavbarSlice = createSlice({
     name: "Navbar",
+    // Defines the initial states
     initialState:{
         homeDisabled: false,
         homeColor:"text-light",
@@ -13,6 +18,8 @@ export const NavbarSlice = createSlice({
         disabled: false
     },
     reducers:{
+
+        // This action is triggered when the "Home" button is clicked
         homeClicked: (state) =>{
             state.homeDisabled = true
             state.homeColor = "text-info"
@@ -20,6 +27,7 @@ export const NavbarSlice = createSlice({
             state.moviesColor = "text-light"
         },
 
+        // This action is triggered when the "Movies" button is clicked
         movieClicked: (state) => {
             state.homeDisabled = false;
             state.homeColor = "text-light"
@@ -27,7 +35,7 @@ export const NavbarSlice = createSlice({
             state.moviesColor = "text-info" 
         },
           
-
+        // This action enables all the buttons in the Navbar
         enable: (state) =>{
             state.homeDisabled = false;
             state.moviesDisabled = false;
@@ -39,6 +47,7 @@ export const NavbarSlice = createSlice({
 
         },
 
+        // This action is triggered when the "Register" button is clicked
         enableRegister: (state) =>{
             state.register = true;
             state.homeDisabled = true;
@@ -46,6 +55,7 @@ export const NavbarSlice = createSlice({
             state.disabled = true;
         },
 
+        // This action is triggered when the user navigates to a different page
         pageSwitch: (state) =>{
             state.homeDisabled = false;
             state.moviesDisabled = false;
@@ -56,7 +66,9 @@ export const NavbarSlice = createSlice({
     }
 })
 
+// Exports the Navbar states
 export const {homeClicked, movieClicked, enable,enableRegister,pageSwitch} = NavbarSlice.actions
 
+// Exports the reducer
 export default NavbarSlice.reducer
 

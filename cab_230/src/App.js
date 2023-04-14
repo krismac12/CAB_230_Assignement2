@@ -1,3 +1,4 @@
+// Imports the necessary files and components
 import logo from './logo.svg';
 import './App.css';
 import Home from './Pages/Home';
@@ -6,7 +7,9 @@ import MovieData from './Pages/MovieData';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+// Defines the main component of the application
 function App() {
+  // Returns the different routes of the application using React Router
   return (
     <BrowserRouter>
     <Routes>

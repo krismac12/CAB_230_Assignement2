@@ -1,3 +1,7 @@
+/* 
+Applies to the main div in the home page to center the text 
+and cover the screen with the background image
+*/
 #main{
     background-repeat: no-repeat;
     background-size: cover;
@@ -12,12 +16,13 @@
     width: 100%;
     height: 100%;
 }
-
+/* Styling the top text of the home page */
 #top_text{
     font-family: "Calibri";
     font-size: 24pt;
 }
 
+/* Styling the bottom text of the home page */
 #bot_text{
     font-family: "Calibri";
     font-size: 10pt;

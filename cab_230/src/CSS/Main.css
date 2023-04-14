@@ -1,11 +1,20 @@
+/* 
+applies to the content div on all pages
+used to push elements down below the Navbar
+*/
 .content{
     margin-top: 50px;
 }
 
+/* disable anchor tags */
 .disabled-link {
     pointer-events: none;
 }
 
+/* 
+applies to all popup
+used to fix the position of the popup to the center of the screen
+*/
 .popup {
     position: fixed;
     top: 50%;

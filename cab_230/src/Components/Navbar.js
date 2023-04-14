@@ -1,3 +1,4 @@
+//Import Necessary Files
 import { Nav } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useLocation, Link } from "react-router-dom";
@@ -6,22 +7,22 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { homeClicked, movieClicked,enable,enableRegister, pageSwitch } from "../redux/NavbarReducer";
 
-export default function Navbar(){
+/*
+This component renders the Navbar that appears at the top of most pages
+which is responsible for the main navigation of each page
+*/
 
+// Navbar Component
+export default function Navbar(){
+    
+    // Defines the current page location
     const location = useLocation();
 
-    /*
-    const homeDisabled = location.pathname === "/";
-    const homeColor = homeDisabled ? "text-info" : "text-light";
-    
-    const moviesDisabled = location.pathname === "/movies";
-    const moviesColor = moviesDisabled ? "text-info" : "text-light";
-    */
-
+    // Defines the navbar states such as disabled buttons and colours
     const{ homeDisabled, homeColor,moviesDisabled,moviesColor,register,login,disabled } = useSelector(state => state.Navbar)
     const dispatch = useDispatch();
 
-
+    // Dispatches a different action depending on current page location
     switch(location.pathname){
         case "/":
             if(!register){
@@ -40,6 +41,7 @@ export default function Navbar(){
             break
     }
 
+    // Changes the opacity of the navbar
     const navbarStyle = location.pathname === "/" ?{
         opacity: 0.8,
       }
@@ -50,7 +52,7 @@ export default function Navbar(){
 
     
 
-
+    // Render Navbar Component
     return(
         <Nav className="bg-dark" style={navbarStyle} id={NavbarCss.top}>
             <div className="d-flex justify-content-between">
@@ -60,6 +62,7 @@ export default function Navbar(){
                 <Link to ="/movies" className={moviesDisabled ? "disabled-link" : "normal"}>
                     <Button className={moviesColor} variant="dark" disabled={moviesDisabled}><h4 className="nav-button">Movies</h4></Button>
                 </Link>
+                {/* Dispatches the enableRegister Action on click */}
                 <Button className="text-light" variant="dark"  disabled={disabled}  onClick={() => dispatch(enableRegister())}><h4 className="nav-button">Register</h4></Button>
                 <Button className="text-light" variant="dark" disabled={disabled}><h4 className="nav-button">Login</h4></Button>
             </div>

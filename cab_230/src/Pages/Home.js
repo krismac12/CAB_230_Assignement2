@@ -1,3 +1,4 @@
+// Import Necessary Files
 import Navbar from "../Components/Navbar"
 import Homecss from "../CSS/Home.module.css"
 import Register from "../Components/Register";
@@ -5,30 +6,44 @@ import Popup from "../Components/Popup";
 import "../CSS/Main.css"
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+/*
+This component renders the Home page which is the default page
+The page also has the welcome message displayed as well as a 'Movie' scene background
+*/
 
+// Function the returns a random number
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
+
+// Home Component
 export default function Home(){
 
+    // Defines text for the top and bottom of the page
     const topText = ["Kristan Macaraeg's Very ", <br />, 'Epic Movie Searching',<br/>,"Website"];
     const botText = ["All data is from IMDB, Metacritic and", <br />, 'RottenTomatoes',<br/>,"© 2023 Kristan Macaraeg"];
 
+    //Images used for the background of page
     const imageUrls = ["../../Images/Movie_1.png","../../Images/Movie_2.png","../../Images/Movie_3.png","../../Images/Movie_4.png","../../Images/Movie_5.png"];
 
     const [imageNumber,setImageNumber] = useState(getRandomNumber(0,4)) 
 
+    // Use the useSelector hook to access the "register" property in the state of the Navbar component
     const registerPopup = useSelector(state => state.Navbar.register)
 
+
+    // useEffect hook to set new ImageNumber after a set interval
     useEffect(() => {
         const interval = setInterval(() => {
             setImageNumber(getRandomNumber(0,4));
         }, 60000);
-    
+
+        // Resets the interval
         return () => clearTimeout(interval);
       }, []);
 
+    // Render Home Component
     return(
         <div id = "page">
             <div id={Homecss.main} style={{ backgroundImage: `url(${imageUrls[imageNumber]})` }}>
@@ -38,6 +53,7 @@ export default function Home(){
                 </div>
                 <p className="fixed-bottom text-light" id = {Homecss.bot_text}>{botText}</p>
             </div>
+            {/* renders the register popup */}
             <Popup trigger = {registerPopup}>
                 <Register></Register>
             </Popup>

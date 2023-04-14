@@ -55,6 +55,13 @@ export const NavbarSlice = createSlice({
             state.disabled = true;
         },
 
+        disableRegister: (state) =>{
+            state.register = false;
+            state.homeDisabled = false;
+            state.moviesDisabled = false;
+            state.disabled = false;
+        },
+
         // This action is triggered when the user navigates to a different page
         pageSwitch: (state) =>{
             state.homeDisabled = false;
@@ -67,7 +74,7 @@ export const NavbarSlice = createSlice({
 })
 
 // Exports the Navbar states
-export const {homeClicked, movieClicked, enable,enableRegister,pageSwitch} = NavbarSlice.actions
+export const {homeClicked, movieClicked, enable,enableRegister,pageSwitch,disableRegister} = NavbarSlice.actions
 
 // Exports the reducer
 export default NavbarSlice.reducer

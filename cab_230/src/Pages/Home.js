@@ -6,6 +6,7 @@ import Popup from "../Components/Popup";
 import "../CSS/Main.css"
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Alert } from "react-bootstrap";
 /*
 This component renders the Home page which is the default page
 The page also has the welcome message displayed as well as a 'Movie' scene background
@@ -37,8 +38,6 @@ export default function Home(){
     // Changes HTML class name when popup is visible
     const htmlClassName = disabled ? "popup-visible" : "";
 
-
-
     // useEffect hook to set new ImageNumber after a set interval
     useEffect(() => {
         const interval = setInterval(() => {
@@ -49,12 +48,17 @@ export default function Home(){
         return () => clearTimeout(interval);
       }, []);
 
+    
+
     // Render Home Component
     return(
         <div id = "page">
             <div id={Homecss.main} style={{ backgroundImage: `url(${imageUrls[imageNumber]})` }} className="main-darken">
                 <Navbar></Navbar>
                 <div className = "content">
+                    <Alert show={false} variant="success" className="successful-alert">
+                        user created
+                    </Alert>
                     <p className="text-light" id = {Homecss.top_text}>{topText}</p>
                 </div>
                 <p className="fixed-bottom text-light" id = {Homecss.bot_text}>{botText}</p>

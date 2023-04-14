@@ -4,6 +4,9 @@ import { useState } from 'react';
 import Button from "react-bootstrap/Button";
 import { useDispatch } from 'react-redux';
 import Form from 'react-bootstrap/Form';
+import { registerUser } from '../API-Calls/UserCalls';
+import { Alert, } from 'react-bootstrap';
+import { disableRegister } from '../redux/NavbarReducer';
 
 /*
 Component for rendering the register popup
@@ -14,6 +17,10 @@ function Register() {
 
   // validated to check wether user input is valid
   const [validated, setValidated] = useState(false)
+
+  const [showError,setError] = useState(false)
+  const [message,setMessage] = useState("")
+
   // to store user input
   const [formData, setFormData] = useState({
     email: "",
@@ -59,12 +66,31 @@ function Register() {
     }
     // sets validated as true
     setValidated(true);
+
+    // Post Request with formData to register user
+    registerUser(formData)
+    .then(res => {
+
+      // if error set error as true and display message
+      if(res.error){
+        setError(true)
+        setMessage(res.message)
+      }
+      // Disable register component
+      else{
+        dispatch(disableRegister())
+      }
+    })
   };
-  
+
   return (
     <div>
       <h4>Register Now</h4>
       {/* Form for user registration */}
+
+      <Alert show={showError} variant="danger">
+        {message}
+      </Alert>
 
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
 

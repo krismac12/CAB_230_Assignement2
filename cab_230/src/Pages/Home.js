@@ -31,6 +31,12 @@ export default function Home(){
 
     // Use the useSelector hook to access the "register" property in the state of the Navbar component
     const registerPopup = useSelector(state => state.Navbar.register)
+    // Defines the disabled state used to disable UI elements in the page if a popup is on screen
+    const disabled = useSelector(state => state.Navbar.disabled)
+
+    // Changes HTML class name when popup is visible
+    const htmlClassName = disabled ? "popup-visible" : "";
+
 
 
     // useEffect hook to set new ImageNumber after a set interval
@@ -46,7 +52,7 @@ export default function Home(){
     // Render Home Component
     return(
         <div id = "page">
-            <div id={Homecss.main} style={{ backgroundImage: `url(${imageUrls[imageNumber]})` }}>
+            <div id={Homecss.main} style={{ backgroundImage: `url(${imageUrls[imageNumber]})` }} className="main-darken">
                 <Navbar></Navbar>
                 <div className = "content">
                     <p className="text-light" id = {Homecss.top_text}>{topText}</p>
@@ -57,6 +63,8 @@ export default function Home(){
             <Popup trigger = {registerPopup}>
                 <Register></Register>
             </Popup>
+            <html className={htmlClassName} />
         </div>
+        
     )
 }

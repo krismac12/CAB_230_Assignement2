@@ -12,9 +12,12 @@ export default function Movies(){
     // Defines the disabled state used to disable UI elements in the page if a popup is on screen
     const disabled = useSelector(state => state.Navbar.disabled)
 
+    // Changes HTML class name when popup is visible
+    const htmlClassName = disabled ? "popup-visible" : "";
+
     return(
         <div id="page">
-            <div id="main">
+            <div className="main">
                 <Navbar></Navbar>
                 <div className="content">
                     <h4>Movies Data</h4>
@@ -24,6 +27,7 @@ export default function Movies(){
             <Popup trigger = {registerPopup}>
                 <Register></Register>
             </Popup>
+            <html className={htmlClassName} />
         </div>
     )
 }

@@ -21,4 +21,42 @@ used to fix the position of the popup to the center of the screen
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 9999;
-  }
+    background-color: white;
+    padding: 10px;
+    padding-left: 5%;
+    padding-right: 5%;
+    outline: 2px solid black;
+    width: 40%;
+    max-width: 40%;
+
+}
+/* moves the popup close button to top right */
+.popup .btn-close {
+    position: absolute;
+    top: 3%;
+    right: 3%;
+}
+html.popup-visible {
+    position: relative;
+}
+  
+/*
+Applies to all elements if the classname is popup-visible 
+To all elements except for popup and popup children
+Darkens the screen
+*/
+html.popup-visible::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.feedback-message {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}

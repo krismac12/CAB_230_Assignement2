@@ -1,3 +1,9 @@
+/*
+File for all api calls involving user authentication
+*/
+
+
+// API call to register user
 export function registerUser(formData){
     const url = "http://sefdb02.qut.edu.au:3000/user/register"
 
@@ -18,6 +24,7 @@ export function registerUser(formData){
     })
 }
 
+// API call to login user
 export function loginUser(formData){
     const url = "http://sefdb02.qut.edu.au:3000/user/login"
 

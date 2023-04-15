@@ -56,12 +56,16 @@ export const NavbarSlice = createSlice({
             state.disabled = true;
         },
 
+        
+        // This action is triggered when the register popup is closed
         disableRegister: (state) =>{
             state.register = false;
             state.homeDisabled = false;
             state.moviesDisabled = false;
             state.disabled = false;
         },
+
+        // This action is triggered when the "Login" button is clicked
         enableLogin: (state) =>{
             state.login = true;
             state.homeDisabled = true;
@@ -69,6 +73,7 @@ export const NavbarSlice = createSlice({
             state.disabled = true;
         },
 
+        // This action is triggered when the Login popup is closed
         disableLogin: (state) =>{
             state.login = false;
             state.homeDisabled = false;

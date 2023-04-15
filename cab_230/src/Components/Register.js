@@ -126,8 +126,11 @@ function Register() {
           isValid={formData.password && validatePassword(formData.password)}
           ></Form.Control>
           <Form.Control.Feedback type="invalid" className="feedback-message">
-            Password must be at least 8 characters long and contain at least one capital letter.
+            Invalid Password
           </Form.Control.Feedback>
+          <Form.Text className="text-dark">
+            Password must be at least 8 characters long and contain at least one capital letter.
+          </Form.Text>
         </Form.Group>
 
         {/* Confirm Password Input */}

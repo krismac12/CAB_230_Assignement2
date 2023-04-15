@@ -3,9 +3,8 @@ import { Nav } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useLocation, Link } from "react-router-dom";
 import NavbarCss from "../CSS/Navbar.module.css"
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { homeClicked, movieClicked,enable,enableRegister, pageSwitch } from "../redux/NavbarReducer";
+import { homeClicked, movieClicked,enableRegister, pageSwitch,enableLogin } from "../redux/NavbarReducer";
 
 /*
 This component renders the Navbar that appears at the top of most pages
@@ -25,17 +24,17 @@ export default function Navbar(){
     // Dispatches a different action depending on current page location
     switch(location.pathname){
         case "/":
-            if(!register){
+            if(!register && !login){
                 dispatch(homeClicked())
             }
             break
         case "/movies":
-            if(!register){
+            if(!register && !login){
                 dispatch(movieClicked())
             }
             break
         default:
-            if(!register){
+            if(!register && !login){
                 dispatch(pageSwitch())
             }
             break
@@ -64,7 +63,7 @@ export default function Navbar(){
                 </Link>
                 {/* Dispatches the enableRegister Action on click */}
                 <Button className="text-light" variant="dark"  disabled={disabled}  onClick={() => dispatch(enableRegister())}><h4 className="nav-button">Register</h4></Button>
-                <Button className="text-light" variant="dark" disabled={disabled}><h4 className="nav-button">Login</h4></Button>
+                <Button className="text-light" variant="dark" disabled={disabled} onClick={() => dispatch(enableLogin())}><h4 className="nav-button">Login</h4></Button>
             </div>
         </Nav>
     )

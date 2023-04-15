@@ -40,6 +40,7 @@ export const NavbarSlice = createSlice({
             state.homeDisabled = false;
             state.moviesDisabled = false;
             state.register = false;
+            state.login = false;
             state.disabled = false;
             state.moviesColor = "text-light"
             state.homeColor = "text-light"
@@ -61,6 +62,19 @@ export const NavbarSlice = createSlice({
             state.moviesDisabled = false;
             state.disabled = false;
         },
+        enableLogin: (state) =>{
+            state.login = true;
+            state.homeDisabled = true;
+            state.moviesDisabled = true;
+            state.disabled = true;
+        },
+
+        disableLogin: (state) =>{
+            state.login = false;
+            state.homeDisabled = false;
+            state.moviesDisabled = false;
+            state.disabled = false;
+        },
 
         // This action is triggered when the user navigates to a different page
         pageSwitch: (state) =>{
@@ -74,7 +88,7 @@ export const NavbarSlice = createSlice({
 })
 
 // Exports the Navbar states
-export const {homeClicked, movieClicked, enable,enableRegister,pageSwitch,disableRegister} = NavbarSlice.actions
+export const {homeClicked, movieClicked, enable,enableRegister,pageSwitch,disableRegister,enableLogin,disableLogin} = NavbarSlice.actions
 
 // Exports the reducer
 export default NavbarSlice.reducer

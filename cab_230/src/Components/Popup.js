@@ -1,8 +1,9 @@
 // Imports
 import React from 'react'
-import Button from "react-bootstrap/Button";
 import { useDispatch } from 'react-redux';
 import { enable } from '../redux/NavbarReducer';
+import CloseButton from 'react-bootstrap/CloseButton';
+
 
 
 /*
@@ -15,7 +16,7 @@ function Popup(props) {
   /* returns the props.children if trigger is true */
   return (props.trigger) ? (
     <div className='popup'>
-      <Button className='btn-close' onClick={() => dispatch(enable())}></Button>
+      <CloseButton className='btn-close' onClick={() => dispatch(enable())}></CloseButton>
       { props.children }
     </div>
   ) : "";

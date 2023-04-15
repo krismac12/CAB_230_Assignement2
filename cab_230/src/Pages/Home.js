@@ -1,8 +1,7 @@
 // Import Necessary Files
 import Navbar from "../Components/Navbar"
 import Homecss from "../CSS/Home.module.css"
-import Register from "../Components/Register";
-import Popup from "../Components/Popup";
+import Popups from "../Components/Popups";
 import "../CSS/Main.css"
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -30,8 +29,6 @@ export default function Home(){
 
     const [imageNumber,setImageNumber] = useState(getRandomNumber(0,4)) 
 
-    // Use the useSelector hook to access the "register" property in the state of the Navbar component
-    const registerPopup = useSelector(state => state.Navbar.register)
     // Defines the disabled state used to disable UI elements in the page if a popup is on screen
     const disabled = useSelector(state => state.Navbar.disabled)
 
@@ -63,12 +60,10 @@ export default function Home(){
             </div>
             {/* Renders Alert message */}
             <Alert show={display} variant="success" id="successful-alert">
-                        {message}
+                {message}
             </Alert>
-            {/* renders the register popup */}
-            <Popup trigger = {registerPopup}>
-                <Register></Register>
-            </Popup>
+            {/* Renders Popups */}
+            <Popups/>
             <html className={htmlClassName} />
         </div>
         

@@ -8,7 +8,8 @@ import { loginUser } from '../API-Calls/UserCalls';
 import { Alert, } from 'react-bootstrap';
 import { disableLogin } from '../redux/NavbarReducer';
 import { display } from '../redux/AlertsReducer';
-
+import cookie from 'react-cookies'
+import { login } from '../redux/AuthReducer';
 /*
 Component for rendering the login popup
 Allowing users to login
@@ -45,7 +46,6 @@ function Login() {
 
     // checks form validity stops event if not valid
     if (form.checkValidity() === false) {
-      console.log("Not Valid")
       event.stopPropagation();
     } else {
 
@@ -67,7 +67,11 @@ function Login() {
         dispatch(disableLogin())
         // Display alert showing user was logged in
         dispatch(display({ message: "Login Successful" }))
-        console.log(res)
+        cookie.save('Refresh Token', res.refreshToken.token)
+        cookie.save('Bearer Token', res.bearerToken)
+        console.log(cookie.load('Bearer Token'))
+        dispatch(login())
+
       }
     })
   };

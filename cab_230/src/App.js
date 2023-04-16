@@ -7,12 +7,15 @@ import MovieData from './Pages/MovieData';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import useHideAlertAfterDelay from './Containers/AlertContainer';
+import AuthContainer from './Containers/AuthContainer';
 
 // Defines the main component of the application
 function App() {
 
   // A function that hides an Alert after 5 seconds
   useHideAlertAfterDelay()
+
+  AuthContainer()
 
   // Returns the different routes of the application using React Router
   return (

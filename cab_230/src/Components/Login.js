@@ -68,8 +68,7 @@ function Login() {
         // Display alert showing user was logged in
         dispatch(display({ message: "Login Successful" }))
         cookie.save('Refresh Token', res.refreshToken.token)
-        cookie.save('Bearer Token', res.bearerToken)
-        console.log(cookie.load('Bearer Token'))
+        cookie.save('Bearer Token', res.bearerToken.token)
         dispatch(login())
 
       }

@@ -61,3 +61,22 @@ export function PostRefreshToken(refreshToken){
         return res.json()
     })
 }
+
+
+export function logoutUser(refreshToken){
+    const url = "http://sefdb02.qut.edu.au:3000/user/logout"
+    return fetch(url,{
+        method:'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "refreshToken": refreshToken
+        })
+
+    })
+    .then(res => {
+        return res.json()
+    })
+}

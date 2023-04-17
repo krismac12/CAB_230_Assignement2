@@ -1,6 +1,8 @@
 //imports
 
 import { createSlice } from "@reduxjs/toolkit";
+import cookie from 'react-cookies'
+
 /*
 reducer function to keep track if the user is logged in
 */
@@ -22,6 +24,9 @@ export const AuthSlice = createSlice({
         // used to logout the user
         logout: (state) =>{
             state.loggedIn = false
+            cookie.remove('Bearer Token')
+            cookie.remove('Refresh Token')
+
         }
     }
 })

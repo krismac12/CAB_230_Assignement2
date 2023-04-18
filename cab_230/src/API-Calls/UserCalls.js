@@ -44,6 +44,7 @@ export function loginUser(formData){
     })
 }
 
+// API call to obtain new bearer token
 export function PostRefreshToken(refreshToken){
     const url = "http://sefdb02.qut.edu.au:3000/user/refresh"
     return fetch(url,{
@@ -62,7 +63,7 @@ export function PostRefreshToken(refreshToken){
     })
 }
 
-
+// API call to logout user
 export function logoutUser(refreshToken){
     const url = "http://sefdb02.qut.edu.au:3000/user/logout"
     return fetch(url,{

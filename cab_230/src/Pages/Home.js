@@ -46,7 +46,7 @@ export default function Home(){
       }, []);
 
     // Defines wether to display alert and what message to display
-    const{display,message} = useSelector(state => state.Alerts)
+    const{display,message,variant} = useSelector(state => state.Alerts)
 
     // Render Home Component
     return(
@@ -59,7 +59,7 @@ export default function Home(){
                 <p className="fixed-bottom text-light" id = {Homecss.bot_text}>{botText}</p>
             </div>
             {/* Renders Alert message */}
-            <Alert show={display} variant="success" id="successful-alert">
+            <Alert show={display} variant={variant} id="alert">
                 {message}
             </Alert>
             {/* Renders Popups */}

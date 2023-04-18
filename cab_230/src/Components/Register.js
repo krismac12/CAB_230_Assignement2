@@ -80,7 +80,7 @@ function Register() {
         // Disable register component
         dispatch(disableRegister())
         // Display alert showing user was created
-        dispatch(display({ message: "User created" }))
+        dispatch(display({ message: "User created",variant:"success" }))
       }
     })
   };

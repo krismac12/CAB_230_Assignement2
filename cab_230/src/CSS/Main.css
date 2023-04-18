@@ -71,7 +71,7 @@ makes the alert message wrap
 /*
 positions successful alerts to top center
 */
-#successful-alert{
+#alert{
     position: absolute;
     top: 10%;
     left: 50%;

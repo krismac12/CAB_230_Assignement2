@@ -61,7 +61,7 @@ export default function Navbar(){
         logoutUser(refreshToken)
         .then(res =>{
             dispatch(logout())
-            dispatch(display({ message: "User Logged Out" }))
+            dispatch(display({ message: "User Logged Out",variant: "danger"}))
         })
 
     }

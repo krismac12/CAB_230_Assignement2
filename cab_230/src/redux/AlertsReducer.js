@@ -7,13 +7,15 @@ export const AlertsSlice = createSlice({
     name: "Alerts",
     initialState:{
         display: false,
-        message: ""
+        message: "",
+        variant: ""
     },
 
     reducers:{
         // Displays alert and sets the message of alert
         display: (state,action) =>{
             state.message = action.payload.message;
+            state.variant = action.payload.variant;
             state.display = true
         },
 

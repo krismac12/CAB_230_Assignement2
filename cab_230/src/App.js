@@ -1,9 +1,9 @@
 // Imports the necessary files and components
-import logo from './logo.svg';
 import './App.css';
 import Home from './Pages/Home';
 import Movies from './Pages/Movies';
 import MovieData from './Pages/MovieData';
+import PersonDetails from './Pages/PersonDetails';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import useHideAlertAfterDelay from './Containers/AlertContainer';
@@ -24,6 +24,7 @@ function App() {
       <Route path='/' exact Component={Home}></Route>
       <Route path='/movies' exact Component={Movies}></Route>
       <Route path='/movie/data' exact Component={MovieData}></Route>
+      <Route path='/movie/person/:id' exact Component={PersonDetails}></Route>
     </Routes>
     </BrowserRouter>
   );

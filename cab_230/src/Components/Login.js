@@ -66,7 +66,7 @@ function Login() {
         // Disable login component
         dispatch(disableLogin())
         // Display alert showing user was logged in
-        dispatch(display({ message: "Login Successful" }))
+        dispatch(display({ message: "Login Successful",variant: "success" }))
         cookie.save('Refresh Token', res.refreshToken.token)
         cookie.save('Bearer Token', res.bearerToken.token)
         dispatch(login())

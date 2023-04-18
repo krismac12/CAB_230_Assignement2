@@ -15,7 +15,7 @@ export default function Movies(){
     const htmlClassName = disabled ? "popup-visible" : "";
 
     // Defines wether to display alert and what message to display
-    const{display,message} = useSelector(state => state.Alerts)
+    const{display,message,variant} = useSelector(state => state.Alerts)
 
     return(
         <div id="page">
@@ -26,7 +26,7 @@ export default function Movies(){
                 </div>
             </div>
             {/* Renders Alert message */}
-            <Alert show={display} variant="success" id="successful-alert">
+            <Alert show={display} variant={variant} id="alert">
                 {message}
             </Alert>
             {/* Renders Popups */}

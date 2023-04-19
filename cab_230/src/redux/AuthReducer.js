@@ -3,6 +3,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import cookie from 'react-cookies'
 
+
 /*
 reducer function to keep track if the user is logged in
 */

@@ -26,7 +26,7 @@ export default function Movies(){
                 <Navbar></Navbar>
                 <div className="content">
                     <h4>Movies Page</h4>
-                    <Link to ="/movie/person/2" className={disabled ? "disabled-link" : "normal"}>
+                    <Link to ="/movie/person/nm0000191" className={disabled ? "disabled-link" : "normal"}>
                         <Button className="text-light" variant="dark" disabled = {disabled}>Person Data</Button>
                     </Link>
                 </div> 

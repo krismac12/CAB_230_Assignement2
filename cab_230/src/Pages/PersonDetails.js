@@ -38,12 +38,6 @@ export default function PersonDetails(){
     const { id } = useParams();
 
 
-    // to dispatch the redux action to logout user and display message when bearer token has expired
-    const handleDispatch = () => {
-        dispatch(displayAlert({ message: "Login Expired", variant: "danger" }));
-        dispatch(logout());
-      }
-
 
     // fetches person data when pages is loaded and refresh bearer token if expired
     const useHandlePageLoad = () =>{
@@ -59,9 +53,10 @@ export default function PersonDetails(){
                             console.log(res)
                             setAccess(false);
                             setLoading(false);
-                            handleDispatch()
+                            dispatch(logout()) 
                       } else {
                             // store new refresh and bearer token
+                            console.log(res)
                             cookie.save('Refresh Token', res.refreshToken.token);
                             cookie.save('Bearer Token', res.bearerToken.token);
                             console.log("refreshed Token")
@@ -72,10 +67,6 @@ export default function PersonDetails(){
                 if (!res.error) {
                   setPerson(res)
                   setLoading(false)
-                }
-                else{
-                    setLoading(false)
-                    setAccess(false)
                 }
               })
         }, [])

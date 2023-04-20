@@ -29,6 +29,8 @@ export default function Movies(){
     const[pageNumber,setPageNumber] = useState(1)
     const[movieTitle,setMovieTitle] = useState(null)
     const[movieYear,setMovieYear] = useState(null)
+    const[total,setTotal] = useState(null)
+
 
     const [rowData,setRowData] = useState([
         {}
@@ -45,17 +47,19 @@ export default function Movies(){
 
 
     useEffect(() => {
-        fetchMovies(1, movieTitle, movieYear)
+        fetchMovies(null, movieTitle, movieYear)
             .then(res => {
                 setRowData(res.data);
+                setTotal(res.pagination.total)
                 console.log(res)
             });
     }, []);
 
     const handleSearch = (searchValues) => {
-        fetchMovies(1, searchValues.title, searchValues.year)
+        fetchMovies(null, searchValues.title, searchValues.year)
           .then((res) => {
             setRowData(res.data);
+            setTotal(res.pagination.total)
             console.log(res)
           });
       }
@@ -75,6 +79,7 @@ export default function Movies(){
                         <input type="number" min="1900" max="2023" onChange={(e) => setMovieYear(e.target.value)}></input>
                         <h4>Search</h4>
                         <Button className="text-light" variant="dark" disabled={disabled} onClick={() => handleSearch({title: movieTitle,year: movieYear})}><h4>Search</h4></Button>
+                        <h4>{total}</h4>
                     </div>
                     <div className="ag-theme-alpine" style={{width:'100%'}}>
                         <AgGridReact

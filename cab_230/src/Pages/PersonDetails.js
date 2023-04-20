@@ -51,7 +51,7 @@ export default function PersonDetails(){
             fetchPerson(id, cookie.load('Bearer Token'))
               .then(res => {
                 // to refresh bearer token
-                if (res.message === "JWT token has expired") {
+                if (res.error) {
                   PostRefreshToken(cookie.load('Refresh Token'))
                     .then(res => {
                         // if refresh token is invalid remove page access

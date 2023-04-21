@@ -20,11 +20,13 @@ export function fetchPerson(imdbID,token){
     })
 }
 
+// API Call to fetch movies and pagination data
 export function fetchMovies(pageNumber, movieTitle, releaseYear) {
     const url = "http://sefdb02.qut.edu.au:3000/movies/search/?";
 
     const params = {};
 
+    // to set search parameters if not null
     if (pageNumber) {
         params.page = pageNumber;
     }

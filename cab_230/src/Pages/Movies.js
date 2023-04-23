@@ -12,6 +12,8 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
+
+// function for setting and clearing debounce timer
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -41,6 +43,11 @@ export default function Movies(){
 
     const[pageNumber,setPageNumber] = useState(1)
 
+
+    // find valid years in search
+    const currentYear = new Date().getFullYear();
+    const years = Array.from({ length: currentYear - 1899 }, (_, i) => 1900 + i);
+
     // Used to set movie title and movie year
     const movieTitleRef = useRef(null);
     const movieYearRef = useRef(null);
@@ -48,6 +55,8 @@ export default function Movies(){
     // Used for form data on search
     const[movieTitle,setMovieTitle] = useState()
     const[movieYear,setMovieYear] = useState()
+
+
 
 
     // Used to check total movies and how many movies are in the table
@@ -111,7 +120,7 @@ export default function Movies(){
           // User has scrolled to the bottom of the page
           setPageNumber(prev => prev+1);
         }
-    }, 400);
+    }, 100);
 
     // call debouncedHandleScroll when user scrolls
     useEffect(() => {
@@ -132,38 +141,60 @@ export default function Movies(){
         }
     }, [pageNumber]);
 
+    // Clears form data 
+    const handleClear= () =>{
+        setMovieTitle()
+        setMovieYear()
+        movieTitleRef.current.value = ""
+        movieYearRef.current.value = ""
+    }
+
     return(
         <div id="page">
             <div className="main">
                 <Navbar></Navbar>
                 <div className="content">
-                    <h4>Movies Page</h4>
+                    <h4>Search for Movies</h4>
+
+                    {/*
                     <Link to ="/movie/person/nm0000191" className={disabled ? "disabled-link" : "normal"}>
                         <Button className="text-light" variant="dark" disabled = {disabled}>Person Data</Button>
                     </Link>
+                    */}
+
                     {/* Form for searching movies */}
                     <div id="Search">
-                        <Form>
-                            <Form.Group className="my-3">
-                                <Form.Label>Title</Form.Label>
-                                <Form.Control
-                                    className='w-50'
-                                    name = "movieTitle"
-                                    ref={movieTitleRef}
-                                ></Form.Control>
+                        <Form className="mt-3 " onSubmit={(e) => { e.preventDefault(); handleSearch(); }}>
+                            <Row>
+                                <Col>
+                                    <Form.Label>Movie Title</Form.Label>
+                                </Col>
+                                <Col>
+                                    <Form.Label>Release Year</Form.Label>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Form.Control
+                                        name = "movieTitle"
+                                        ref={movieTitleRef}
+                                    ></Form.Control>
+                                </Col>
+                                <Col>
+                                    <Form.Select  name="movieYear" ref={movieYearRef} defaultValue="" >
+                                      {years.map(year => (
+                                        <option key={year} value={year}>{year}</option>
+                                      ))}
+                                        <option key = "Select" value="">Any year</option>
+                                    </Form.Select>
+                                </Col>
+                            </Row>
+                            <Form.Group className="mt-4 mb-4 col-8 mx-auto">
+                                <div className="d-flex justify-content-center justify-content-between">
+                                    <Button className="text-light w-25 mx-1" variant="primary" onClick={() => handleSearch()} disabled = {disabled}>Search</Button>
+                                    <Button className="text-light w-25 mx-1" variant="danger" onClick={() => handleClear()} disabled = {disabled}>Reset</Button>
+                                </div>
                             </Form.Group>
-                            <Form.Group className="mt-2 mb-4">
-                                <Form.Label>Year</Form.Label>
-                                <Form.Control
-                                    className='w-50'
-                                    name = "movieYear"
-                                    ref={movieYearRef}
-                                    type = "number"
-                                    min="1900"
-                                    max="2023"
-                                ></Form.Control>
-                            </Form.Group>
-                            <Button className="text-light" variant="dark"  onClick={() => handleSearch()}>search</Button>
                         </Form>
                     </div>
                     {/* Table to display movies */}

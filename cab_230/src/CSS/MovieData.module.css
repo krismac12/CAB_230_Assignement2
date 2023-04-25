@@ -1,0 +1,23 @@
+/* To style movie details */
+#movieDetailsText{
+    word-wrap: break-word; 
+    width: 70%;
+}
+
+/* To size movie poster image */
+#poster{
+    width: 200px;
+    height: 300px;
+}
+
+/* Styling for the ratings */
+#movieRatings{
+    width: 60%;
+    margin-right: 25%;
+    width:15%
+}
+
+/* To size movie rating logos */
+#movieRatingsLogos{
+    height: 24px;
+}

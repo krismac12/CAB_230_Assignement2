@@ -1,11 +1,12 @@
 // Imports
 import Navbar from "../Components/Navbar"
 import { useSelector } from "react-redux";
-import { Alert } from "react-bootstrap";
+import { Alert,Card } from "react-bootstrap";
 import Popups from "../Components/Popups";
 import { useEffect, useState } from "react";
 import { fetchMovie } from "../API-Calls/MovieCalls";
 import { useParams } from "react-router-dom";
+import MovieDataCSS from "../CSS/MovieData.module.css"
 
 
 /*
@@ -24,16 +25,19 @@ export default function Movies(){
     // defines wether the page is loading
     const [loading,setLoading] = useState(true)
 
+    // Used to store movie data
     const[movie,setMovie] = useState()
+    // IMDB id from url
     const { id } = useParams()
 
+    // Fetches movie data on load
     useEffect(() =>{
         fetchMovie(id)
         .then(res =>{
             setMovie(res)
             setLoading(false)
         })
-    },[])
+    },[id])
 
 
     return(
@@ -43,14 +47,63 @@ export default function Movies(){
                 <div className="content">
                     {loading ?
                         <div>
-                            <p>Loading</p>
+                            <p>Loading...</p>
                         </div>
                         :
                         <div>
-                            <h4>{movie.title}</h4>
-                            <p>Release Year: {movie.year}</p>
-                            <p>Country: {movie.country}</p>
-                            <p>Box office: {movie.boxoffice}</p>
+                            {/* Card to display movie details */}
+                            <Card>
+                              <Card.Body>
+                                <div className="d-flex align-items-start ">
+                                    <div className="flex-grow-1" id={MovieDataCSS.movieDetailsText}>
+                                    <Card.Title ><h2>{movie.title}</h2></Card.Title>
+                                        <Card.Text style={{width: '90%' }}>
+                                            Release Year: {movie.year}<br />
+                                            Runtime: {movie.runtime} minutes<br/>
+                                            Country: {movie.country}<br />
+                                            Genres: {movie.genres.join(", ")}<br/>
+                                            { movie.boxoffice?
+                                            <div>
+                                                Box office: ${movie.boxoffice.toLocaleString()}<br />
+                                            </div>
+                                            :""
+                                            }
+                                            <br/>
+                                            <h4>Plot Summary:</h4>
+                                            {movie.plot}
+                                        </Card.Text>
+                                    </div>
+                                    <div id={MovieDataCSS.movieRatings}>
+                                        {/* To Display Ratings */}
+                                        <Card.Text>
+                                            <div className="d-flex justify-content-end">
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/863px-IMDB_Logo_2016.svg.png?20200406194337" alt="" id={MovieDataCSS.movieRatingsLogos}></img>
+                                                <span style={{marginLeft: "10px"}}>{movie.ratings[0].value}</span>
+                                            </div>
+                                            <br/>
+                                            { movie.ratings[1].value != null ?
+                                            <div>
+                                                <div className="d-flex justify-content-end">
+                                                    <img src="https://www.rottentomatoes.com/assets/pizza-pie/images/rottentomatoes_logo_40.336d6fe66ff.png" alt="" id={MovieDataCSS.movieRatingsLogos}></img>
+                                                    <span style={{marginLeft: "10px"}}>{movie.ratings[1].value}</span>
+                                                </div>
+                                                <br/>
+                                            </div>
+                                            :""
+                                            }
+                                            { movie.ratings[2].value != null ?
+                                            <div className="d-flex justify-content-end">
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Metacritic_logo.svg/1089px-Metacritic_logo.svg.png?20180714112338" alt="" id={MovieDataCSS.movieRatingsLogos}></img>
+                                                <span style={{marginLeft: "10px"}}>{movie.ratings[2].value}</span>
+                                            </div>
+                                            :""
+                                            }
+                                        </Card.Text>
+                                    </div>
+                                  <Card.Img src={movie.poster}    id={MovieDataCSS.poster}/>
+                                </div>
+                              </Card.Body>
+                            </Card>
                         </div>
                     }
                 </div>

@@ -23,7 +23,7 @@ function App() {
     <Routes>
       <Route path='/' exact Component={Home}></Route>
       <Route path='/movies' exact Component={Movies}></Route>
-      <Route path='/movie/data' exact Component={MovieData}></Route>
+      <Route path='/movie/data/:id' exact Component={MovieData}></Route>
       <Route path='/movie/person/:id' exact Component={PersonDetails}></Route>
     </Routes>
     </BrowserRouter>

@@ -72,7 +72,7 @@ export default function Movies(){
 
     // column definition of table
     const columnDefs = [
-        {field: 'title',sortable: true, cellRendererFramework: (params)=><div><Link to={`/movies/data/${params.data.imdbID}`}>{params.value}</Link></div>, width: 400 },
+        {field: 'title',sortable: true, cellRendererFramework: (params)=><div><Link to={`/movie/data/${params.data.imdbID}`}>{params.value}</Link></div>, width: 400 },
         {field: 'year',sortable: true},
         {field: 'imdbRating',sortable: true},
         {field: 'rottenTomatoesRating',sortable: true},
@@ -206,7 +206,9 @@ export default function Movies(){
                         />
                     </div>
                     <div>
-                        <p>Showing {current} out of {total} movies</p>
+                        {current > 0 ?(<p>Showing {current} out of {total} movies</p>)
+                            :(<p>No Movies to display</p>)
+                        }
                     </div>
                 </div> 
             </div>

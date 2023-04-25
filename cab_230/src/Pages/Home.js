@@ -25,7 +25,7 @@ export default function Home(){
     const botText = ["All data is from IMDB, Metacritic and", <br />, 'RottenTomatoes',<br/>,"© 2023 Kristan Macaraeg"];
 
     //Images used for the background of page
-    const imageUrls = ["../../Images/Movie_1.png","../../Images/Movie_2.png","../../Images/Movie_3.png","../../Images/Movie_4.png","../../Images/Movie_5.png"];
+    const imageUrls = ["https://i.imgur.com/q5Tvsgf.png","https://i.imgur.com/MblV7w0.png","https://i.imgur.com/kAH1jBS.png","https://i.imgur.com/SnZf3UW.png","https://i.imgur.com/NrFShwn.png"];
 
     const [imageNumber,setImageNumber] = useState(getRandomNumber(0,4)) 
 

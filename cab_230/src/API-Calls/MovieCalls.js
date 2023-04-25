@@ -44,7 +44,23 @@ export function fetchMovies(pageNumber, movieTitle, releaseYear) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
-        },
+        }
+    })
+    .then(res => {
+        return res.json();
+    });
+}
+
+// API Call to fetch specific movie data
+export function fetchMovie(movieId){
+    const url = "http://sefdb02.qut.edu.au:3000/movies/data/" + movieId
+    
+    return fetch(url,{
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
     })
     .then(res => {
         return res.json();

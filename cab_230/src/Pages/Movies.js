@@ -81,15 +81,7 @@ export default function Movies(){
     ]
 
 
-    // to fetch first page of movies
-    useEffect(() => {
-        fetchMovies(null,null,null)
-            .then(res => {
-                setRowData(res.data)
-                setTotal(res.pagination.total)
-                setCurrent(res.pagination.to)
-            });
-    }, []);
+
 
     // to set movie title year and page after search
     const handleSearch = () => {

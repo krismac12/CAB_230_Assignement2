@@ -7,7 +7,12 @@ import { useEffect, useState } from "react";
 import { fetchMovie } from "../API-Calls/MovieCalls";
 import { useParams } from "react-router-dom";
 import MovieDataCSS from "../CSS/MovieData.module.css"
+import { AgGridReact } from "ag-grid-react";
+import { Link } from "react-router-dom";
 
+
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 /*
 This component renders a page responsible for showing specific movie data 
@@ -30,11 +35,24 @@ export default function Movies(){
     // IMDB id from url
     const { id } = useParams()
 
+
+    const [rowData,setRowData] = useState([
+        {}
+    ])
+
+    const columnDefs = [
+        {field: 'category',sortable: true,headerName:"Role",width:150},
+        {field: 'name',sortable: true,headerName:"Name",cellRendererFramework: (params)=><div><Link to={`/movie/person/${params.data.id}`}>{params.value}</Link></div>,width:270},
+        {field: 'characters',sortable: true,headerName:"Characters",width:336}
+
+    ]
+
     // Fetches movie data on load
     useEffect(() =>{
         fetchMovie(id)
         .then(res =>{
             setMovie(res)
+            setRowData(res.principals)
             setLoading(false)
         })
     },[id])
@@ -104,6 +122,18 @@ export default function Movies(){
                                 </div>
                               </Card.Body>
                             </Card>
+                            <br></br>
+                            <div className="mx-auto" style={{width:"60%" }}>     
+                                <div className="ag-theme-alpine">
+                                    <h4>Cast of {movie.title}:</h4>
+                                    <AgGridReact
+                                        rowData={rowData}
+                                        columnDefs={columnDefs}
+                                        domLayout="autoHeight"
+                                    />
+                                </div>
+                            </div>
+                            <br/>
                         </div>
                     }
                 </div>

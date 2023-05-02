@@ -155,7 +155,7 @@ export default function Movies(){
                     */}
 
                     {/* Form for searching movies */}
-                    <div id="Search">
+                    <div id="Search" style={{width:'99%'}}>
                         <Form className="mt-3 " onSubmit={(e) => { e.preventDefault(); handleSearch(); }}>
                             <Row>
                                 <Col>

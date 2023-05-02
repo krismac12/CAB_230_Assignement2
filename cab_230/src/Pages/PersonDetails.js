@@ -10,6 +10,9 @@ import { useState,useEffect } from "react";
 import { PostRefreshToken } from "../API-Calls/UserCalls";
 import { display  as displayAlert} from '../redux/AlertsReducer';
 import { logout } from "../redux/AuthReducer";
+import { Link } from "react-router-dom";
+import { AgGridReact } from "ag-grid-react";
+
 
 /*
 This component renders a page responsible for showing specific movie data 
@@ -38,6 +41,17 @@ export default function PersonDetails(){
     const { id } = useParams();
 
 
+    const [roleData,setRoleData] = useState([
+      {}
+    ])
+
+    const columnDefs = [
+      {field: 'category',sortable: true,headerName:"Role",width:"100%"},
+      {field: 'movieName',sortable: true,headerName:"Movie",cellRendererFramework: (params)=><div><Link to={`/movie/data/${params.data.movieId}`}>{params.value}</Link></div>,width:"500%"},
+      {field: 'characters',sortable: true,headerName:"Characters",width:"300%"},
+      {field: 'imdbRating',sortable: true,headerName:"Rating",width:"100%"}
+
+    ]
 
     // fetches person data when pages is loaded and refresh bearer token if expired
     const useHandlePageLoad = () =>{
@@ -46,6 +60,7 @@ export default function PersonDetails(){
           .then(res => {
             // to refresh bearer token
             if (res.error) {
+              console.log(res)
               PostRefreshToken(cookie.load('Refresh Token'))
               .then(res => {
                 // if refresh token is invalid remove page access
@@ -54,18 +69,26 @@ export default function PersonDetails(){
                   setAccess(false);
                   setLoading(false);
                   dispatch(logout()) 
+                  dispatch(displayAlert({ message: "Login Expired",variant: "danger"}))
                 } else {
                   // store new refresh and bearer token
-                  console.log(res)
-                  cookie.save('Refresh Token', res.refreshToken.token);
-                  cookie.save('Bearer Token', res.bearerToken.token);
-                  console.log("refreshed Token")
-                  window.location.reload()
+                  const refreshTokenPromise = cookie.save('Refresh Token', res.refreshToken.token);
+                  const bearerTokenPromise = cookie.save('Bearer Token', res.bearerToken.token);
+                
+                  // update the cookies and reload the page
+                  async function reloadPage() {
+                    await refreshTokenPromise;
+                    await bearerTokenPromise;
+                    window.location.reload();
+                  }
+                
+                  reloadPage();
                 }
               })
             }
             if (!res.error) {
               setPerson(res)
+              setRoleData(res.roles)
               setLoading(false)
             }
         })
@@ -82,8 +105,23 @@ export default function PersonDetails(){
               <h4>loading...</h4>
             ) : access && loggedIn ? (
               <div>
-                <h4>Person: {person.name}</h4>
-                <h4>Birth Year : {person.birthYear}</h4>
+                <div className="d-flex align-items-start ">
+                  <div className="flex-grow-1">
+                      <h3>{person.name}</h3>
+                      <p className="fs-4">{person.birthYear} - {person.deathYear}</p>
+                  </div>
+                </div>
+                <br/>
+                <div className="ag-theme-alpine mx-auto" style={{width:'80%'}}>
+                    <AgGridReact
+                      rowData={roleData}
+                      columnDefs={columnDefs}
+                      domLayout="autoHeight"
+                      pagination={true}
+                      paginationPageSize={10}
+                    />
+                </div>
+                <br/>
               </div>
             ) : (
               <h4>access denied</h4>

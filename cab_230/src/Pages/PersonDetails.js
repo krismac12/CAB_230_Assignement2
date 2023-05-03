@@ -104,21 +104,25 @@ export default function PersonDetails(){
     const dispatch = useDispatch()
     const loggedIn = useSelector(state => state.Auth.loggedIn)
 
+    // To store person data
     const [person,setPerson] = useState({})
 
     const { id } = useParams();
 
 
+    // To store data about the roles of a person
     const [roleData,setRoleData] = useState([
       {}
     ])
 
+    // To be displayed in a graph
     const [roleGraphData,setRoleGraphData] = useState([
       {}
     ])
 
     
 
+    // Defines the columns of the grid
     const columnDefs = [
       {field: 'category',sortable: true,headerName:"Role",width:"100%"},
       {field: 'movieName',sortable: true,headerName:"Movie",cellRendererFramework: (params)=><div><Link to={`/movie/data/${params.data.movieId}`}>{params.value}</Link></div>,width:"500%"},
@@ -140,8 +144,10 @@ export default function PersonDetails(){
                 console.log(res)
                 // if refresh token is invalid remove page access
                 if (res.error) {
-                  setAccess(false);
-                  setLoading(false);
+                  setAccess(false)
+                  setLoading(false)
+                  cookie.remove('Bearer Token')
+                  cookie.remove('Refresh Token')
                   dispatch(logout()) 
                   dispatch(displayAlert({ message: "Login Expired",variant: "danger"}))
                 } else {
@@ -151,9 +157,9 @@ export default function PersonDetails(){
                 
                   // update the cookies and reload the page
                   async function reloadPage() {
-                    await refreshTokenPromise;
-                    await bearerTokenPromise;
-                    window.location.reload();
+                    await refreshTokenPromise
+                    await bearerTokenPromise
+                    window.location.reload()
                   }
                 
                   reloadPage();

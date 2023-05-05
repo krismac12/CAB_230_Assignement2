@@ -124,10 +124,10 @@ export default function PersonDetails(){
 
     // Defines the columns of the grid
     const columnDefs = [
-      {field: 'category',sortable: true,headerName:"Role",width:"100%"},
-      {field: 'movieName',sortable: true,headerName:"Movie",cellRendererFramework: (params)=><div><Link to={`/movie/data/${params.data.movieId}`}>{params.value}</Link></div>,width:"500%"},
-      {field: 'characters',sortable: true,headerName:"Characters",width:"300%"},
-      {field: 'imdbRating',sortable: true,headerName:"Rating",width:"100%"}
+      {field: 'category',sortable: true,headerName:"Role",width:"100%",flex: 1},
+      {field: 'movieName',sortable: true,headerName:"Movie",cellRendererFramework: (params)=><div><Link to={`/movie/data/${params.data.movieId}`}>{params.value}</Link></div>,width:"200%",flex: 1},
+      {field: 'characters',sortable: true,headerName:"Characters",width:"500%",flex: 1},
+      {field: 'imdbRating',sortable: true,headerName:"Rating",width:"100%",flex: 1}
 
     ]
 
@@ -136,12 +136,10 @@ export default function PersonDetails(){
       useEffect(() => {
         fetchPerson(id, cookie.load('Bearer Token'))
           .then(res => {
-            console.log(res)
             // to refresh bearer token
             if (res.error) {
               PostRefreshToken(cookie.load('Refresh Token'))
               .then(res => {
-                console.log(res)
                 // if refresh token is invalid remove page access
                 if (res.error) {
                   setAccess(false)

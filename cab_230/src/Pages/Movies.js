@@ -72,11 +72,11 @@ export default function Movies(){
 
     // column definition of table
     const columnDefs = [
-        {field: 'title',sortable: true, cellRendererFramework: (params)=><div><Link to={`/movie/data/${params.data.imdbID}`}>{params.value}</Link></div>, width: 400 },
-        {field: 'year',sortable: true},
-        {field: 'imdbRating',sortable: true},
-        {field: 'rottenTomatoesRating',sortable: true},
-        {field: 'metacriticRating',sortable: true}
+        {field: 'title',sortable: true, cellRendererFramework: (params)=><div><Link to={`/movie/data/${params.data.imdbID}`}>{params.value}</Link></div>, flex: 1},
+        {field: 'year',sortable: true, flex: 1},
+        {field: 'imdbRating',sortable: true, flex: 1},
+        {field: 'rottenTomatoesRating',sortable: true, flex: 1},
+        {field: 'metacriticRating',sortable: true, flex: 1}
 
     ]
 
@@ -194,7 +194,7 @@ export default function Movies(){
                         <AgGridReact
                             rowData={rowData}
                             columnDefs={columnDefs}
-                            domLayout="autoHeight"
+                            domLayout={'autoHeight'}
                         />
                     </div>
                     <div>

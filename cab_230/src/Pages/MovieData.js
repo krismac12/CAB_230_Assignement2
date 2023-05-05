@@ -41,9 +41,9 @@ export default function Movies(){
     ])
 
     const columnDefs = [
-        {field: 'category',sortable: true,headerName:"Role",width:150},
-        {field: 'name',sortable: true,headerName:"Name",cellRendererFramework: (params)=><div><Link to={`/movie/person/${params.data.id}`}>{params.value}</Link></div>,width:270},
-        {field: 'characters',sortable: true,headerName:"Characters",width:336}
+        {field: 'category',sortable: true,headerName:"Role",flex: 1},
+        {field: 'name',sortable: true,headerName:"Name",cellRendererFramework: (params)=><div><Link to={`/movie/person/${params.data.id}`}>{params.value}</Link></div>,flex: 1},
+        {field: 'characters',sortable: true,headerName:"Characters",flex: 1}
 
     ]
 

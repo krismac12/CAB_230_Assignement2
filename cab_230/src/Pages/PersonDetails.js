@@ -136,33 +136,10 @@ export default function PersonDetails(){
       useEffect(() => {
         fetchPerson(id, cookie.load('Bearer Token'))
           .then(res => {
-            // to refresh bearer token
+            // Logout user
             if (res.error) {
-              PostRefreshToken(cookie.load('Refresh Token'))
-              .then(res => {
-                // if refresh token is invalid remove page access
-                if (res.error) {
-                  setAccess(false)
-                  setLoading(false)
-                  cookie.remove('Bearer Token')
-                  cookie.remove('Refresh Token')
-                  dispatch(logout()) 
-                  dispatch(displayAlert({ message: "Login Expired",variant: "danger"}))
-                } else {
-                  // store new refresh and bearer token
-                  const refreshTokenPromise = cookie.save('Refresh Token', res.refreshToken.token);
-                  const bearerTokenPromise = cookie.save('Bearer Token', res.bearerToken.token);
-                
-                  // update the cookies and reload the page
-                  async function reloadPage() {
-                    await refreshTokenPromise
-                    await bearerTokenPromise
-                    window.location.reload()
-                  }
-                
-                  reloadPage();
-                }
-              })
+              dispatch(logout()) 
+              dispatch(displayAlert({ message: "Login Expired",variant: "danger"}))
             }
             if (!res.error) {
               setPerson(res)
